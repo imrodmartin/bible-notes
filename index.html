@@ -325,7 +325,7 @@
       html += `<div class="group-label">${sec.g}</div>`;
       sec.books.forEach(([name, slug]) => {
         const delay = (n * 0.012).toFixed(3);
-        html += `<a class="book" href="/bible/${slug}/index.html" style="animation-delay:${delay}s">
+        html += `<a class="book" href="/bible-notes/${slug}/index.html" style="animation-delay:${delay}s">
           <span class="num">${n}</span><span class="name">${name}</span></a>`;
         n++;
       });
