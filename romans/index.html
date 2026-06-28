@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Romans — The Gospel That Changed the World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2a44;
+    --navy-soft: #2c3e5c;
+    --gold: #b08d3f;
+    --gold-soft: #c9a85e;
+    --ink: #2a2622;
+    --paper: #fbfaf6;
+    --rule: #d8d2c4;
+    --muted: #6b6354;
+    --tip-bg: #f4f0e4;
+  }
+  body.dark {
+    --navy: #e8c87a;
+    --navy-soft: #d9b96a;
+    --gold: #c9a85e;
+    --gold-soft: #e8c87a;
+    --ink: #e4ddd0;
+    --paper: #14161d;
+    --rule: #34373f;
+    --muted: #9a917f;
+    --tip-bg: #1d2029;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.7;
+    font-size: 20px;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* Top bar */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px;
+  }
+  body.dark .topbar { background: #0d0f15; border-bottom: 1px solid var(--rule); }
+  .topbar .ttl {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    color: var(--paper); font-size: 17px;
+  }
+  body.dark .topbar .ttl { color: var(--gold-soft); }
+  .controls { display: flex; gap: 8px; }
+  .ctrl-btn {
+    background: rgba(255,255,255,0.12); color: var(--paper);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;
+    padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+    font-family: 'Inter', sans-serif; letter-spacing: 0.5px; transition: background 0.2s;
+  }
+  .ctrl-btn:hover { background: rgba(255,255,255,0.22); }
+
+  /* Hero */
+  .hero {
+    background: var(--navy); color: #f3efe4;
+    padding: 72px 40px 64px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  body.dark .hero { background: linear-gradient(160deg, #1a1d27, #0d0f15); }
+  .hero::after {
+    content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+    width: 90px; height: 3px; background: var(--gold);
+  }
+  .hero .kicker {
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold-soft); font-weight: 700; margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 700;
+    font-size: 72px; line-height: 0.95; letter-spacing: -1px;
+  }
+  .hero .tagline {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 26px; color: #d8cfb8; margin-top: 12px;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 40px 90px; }
+
+  .opener {
+    font-family: 'Cormorant Garamond', serif; font-size: 27px;
+    line-height: 1.5; color: var(--ink); font-weight: 500; margin-bottom: 22px;
+  }
+  .opener .drop { color: var(--gold); }
+  p { margin-bottom: 16px; }
+  p.lead-p { font-size: 21px; }
+
+  /* Section heads */
+  section { margin-bottom: 48px; scroll-margin-top: 70px; }
+  .section-head {
+    border-bottom: 2px solid var(--gold); padding-bottom: 8px; margin-bottom: 20px;
+  }
+  .section-head h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 600; color: var(--navy);
+    line-height: 1.1;
+  }
+  .section-head .sub {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 20px; color: var(--muted); margin-top: 2px;
+  }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 27px; font-weight: 600;
+    color: var(--navy-soft); margin: 26px 0 8px;
+  }
+  strong { color: var(--navy); font-weight: 700; }
+
+  a.v {
+    color: var(--gold); text-decoration: none;
+    border-bottom: 1px solid var(--gold-soft); font-weight: 600;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  a.v:hover { color: var(--navy); border-color: var(--navy); }
+  body.dark a.v:hover { color: var(--gold-soft); }
+
+  ul.points { list-style: none; padding-left: 2px; margin-bottom: 16px; }
+  ul.points li { position: relative; padding-left: 26px; margin-bottom: 9px; font-size: 20px; }
+  ul.points li::before { content: '◆'; position: absolute; left: 0; top: 3px; color: var(--gold); font-size: 11px; }
+
+  /* Fact cards (author / date) */
+  .factcard {
+    background: var(--tip-bg); border-left: 3px solid var(--gold);
+    border-radius: 0 5px 5px 0; padding: 18px 22px; margin: 18px 0;
+  }
+  .factcard p { font-size: 20px; }
+  .factcard .flabel {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); font-weight: 700; margin-bottom: 6px;
+  }
+  .factcard p:last-child { margin-bottom: 0; }
+
+  /* Key verse */
+  blockquote {
+    font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic;
+    color: var(--navy); border-left: 4px solid var(--gold);
+    padding: 8px 0 8px 24px; margin: 20px 0; line-height: 1.45;
+  }
+  blockquote .src { display: block; font-size: 17px; font-style: normal; color: var(--muted); margin-top: 8px; font-family: 'Inter', sans-serif; }
+
+  /* Numbered theme list */
+  ol.themes { counter-reset: t; list-style: none; }
+  ol.themes li {
+    counter-increment: t; position: relative; padding-left: 44px; margin-bottom: 10px;
+    font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: var(--ink);
+  }
+  ol.themes li::before {
+    content: counter(t); position: absolute; left: 0; top: 1px;
+    width: 30px; height: 30px; background: var(--navy); color: var(--paper);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; font-family: 'Inter', sans-serif;
+  }
+  ol.themes li::before { color: #0d0f15; }
+
+  /* Four R's grid */
+  .rgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .rcard {
+    border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px;
+    background: var(--paper); position: relative; overflow: hidden;
+  }
+  .rcard::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--gold);
+  }
+  .rcard .rword { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: var(--navy); }
+  .rcard .rrange { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin: 2px 0 8px; }
+  .rcard p { font-size: 17px; margin-bottom: 4px; }
+
+  /* Outline */
+  .outline { list-style: none; }
+  .outline li {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 12px 0; border-bottom: 1px solid var(--rule);
+  }
+  .outline li:last-child { border-bottom: none; }
+  .outline .oname {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--navy);
+  }
+  .outline a.oname { text-decoration: none; border-bottom: 2px solid var(--gold); transition: color 0.2s; }
+  .outline a.oname:hover { color: var(--gold); }
+  .outline .orange { margin-left: auto; font-size: 16px; font-weight: 600; color: var(--muted); letter-spacing: 0.5px; white-space: nowrap; }
+
+  /* Culture questions */
+  .culture-q {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 21px;
+    color: var(--navy); padding-left: 22px; position: relative; margin-bottom: 8px;
+  }
+  .culture-q::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+  .closing {
+    background: linear-gradient(135deg, var(--tip-bg), #ece6d4);
+    border: 1px solid var(--gold); border-radius: 6px; padding: 24px 28px; margin-top: 30px;
+  }
+  body.dark .closing { background: linear-gradient(135deg, #1d2029, #161922); }
+  .closing p { font-size: 20px; }
+  .closing p:last-child { margin-bottom: 0; }
+  .closing .big {
+    font-family: 'Cormorant Garamond', serif; font-size: 23px; font-weight: 600; color: var(--navy); line-height: 1.4;
+  }
+
+  footer {
+    margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: var(--muted); flex-wrap: wrap; gap: 8px;
+  }
+  footer .brand { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: var(--navy); }
+  footer a { color: inherit; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 52px 24px 46px; }
+    .hero h1 { font-size: 50px; }
+    .hero .tagline { font-size: 21px; }
+    .wrap { padding: 40px 22px 64px; }
+    .section-head h2 { font-size: 28px; }
+    .rgrid { grid-template-columns: 1fr; }
+    .outline li { flex-wrap: wrap; gap: 4px; }
+    .outline .orange { margin-left: 0; }
+  }
+  @media print {
+    .topbar { display: none; }
+    body { background: #fff; font-size: 11pt; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    section, .rcard, .factcard, .closing, blockquote { break-inside: avoid; }
+    @page { margin: 1.5cm; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="ttl">Romans &middot; Book Introduction</span>
+  <div class="controls">
+    <button class="ctrl-btn" onclick="window.print()">Print</button>
+    <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()">Dark</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="kicker">An Introduction to the Book of</div>
+  <h1>Romans</h1>
+  <div class="tagline">The Gospel That Changed the World</div>
+</div>
+
+<div class="wrap">
+
+  <p class="opener"><span class="drop">If you could only keep one book</span> of the Bible besides the Gospels, which would it be? For many Christians throughout history, the answer has been Romans.</p>
+
+  <p class="lead-p">Romans has transformed lives, launched revivals, shaped theology, and clarified the gospel for countless believers. It was instrumental in the conversions of men such as Augustine, Martin Luther, and John Wesley.</p>
+
+  <p>Romans is Paul's fullest explanation of:</p>
+  <ul class="points">
+    <li>Who God is</li>
+    <li>What sin is</li>
+    <li>Why Jesus came</li>
+    <li>How salvation works</li>
+    <li>What faith means</li>
+    <li>How Christians should live</li>
+    <li>God's plan for Israel and the nations</li>
+  </ul>
+
+  <p>If the Bible were a mountain range, Romans would be one of its highest peaks.</p>
+
+  <!-- Author -->
+  <section>
+    <div class="section-head">
+      <h2>Author: The Apostle Paul</h2>
+    </div>
+    <p>Romans identifies its author immediately (<a class="v" href="https://www.biblegateway.com/passage/?search=Romans+1%3A1&version=NET" target="_blank" rel="noopener">1:1</a>). God uniquely prepared him to explain how the gospel fulfills God's promises to Israel while opening salvation to the entire world.</p>
+
+    <div class="factcard">
+      <div class="flabel">Date &amp; Setting</div>
+      <p><strong>A.D. 56–58</strong>, during Paul's third missionary journey. Written from <strong>Corinth</strong>, while Paul was preparing to carry a financial gift to believers in Jerusalem.</p>
+    </div>
+
+    <p>Paul had never visited this church. Unlike most of his letters, Romans was not written to solve a crisis. Paul writes to explain the gospel thoroughly and prepare for future ministry.</p>
+  </section>
+
+  <!-- Major theme -->
+  <section>
+    <div class="section-head">
+      <h2>The Major Theme</h2>
+      <div class="sub">The Righteousness of God Revealed</div>
+    </div>
+    <p>Romans is fundamentally about how sinful people can be made right with a holy God.</p>
+
+    <h3>Keywords</h3>
+    <ul class="points">
+      <li>Righteousness</li>
+      <li>Justified</li>
+      <li>Faith</li>
+      <li>Grace</li>
+      <li>Sin</li>
+      <li>Law</li>
+    </ul>
+
+    <p>The central question is: <strong>How can God be just and still save sinners?</strong></p>
+  </section>
+
+  <!-- Key verse -->
+  <section>
+    <div class="section-head">
+      <h2>Key Verse</h2>
+      <div class="sub"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+1%3A16-17&version=NET" target="_blank" rel="noopener">Romans 1:16–17</a></div>
+    </div>
+    <blockquote>
+      "For I am not ashamed of the gospel, because it is the power of God for salvation to everyone who believes, first to the Jew, and also to the Greek. For in it the righteousness of God is revealed from faith to faith…"
+      <span class="src"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+1%3A16-17&version=NET" target="_blank" rel="noopener">Romans 1:16–17</a></span>
+    </blockquote>
+    <p>These verses function like the thesis statement of the entire book. Everything that follows expands these two verses.</p>
+  </section>
+
+  <!-- Major themes list -->
+  <section>
+    <div class="section-head">
+      <h2>Major Themes of Romans</h2>
+    </div>
+    <ol class="themes">
+      <li>The Sinfulness of Humanity</li>
+      <li>Justification by Faith</li>
+      <li>Grace</li>
+      <li>Union with Christ</li>
+      <li>Life in the Spirit</li>
+      <li>God's Sovereignty</li>
+      <li>Israel and the Nations</li>
+      <li>Christian Transformation</li>
+    </ol>
+  </section>
+
+  <!-- Four R's -->
+  <section>
+    <div class="section-head">
+      <h2>The Theology of Romans</h2>
+      <div class="sub">Four words that summarize the book</div>
+    </div>
+    <div class="rgrid">
+      <div class="rcard">
+        <div class="rword">Ruin</div>
+        <div class="rrange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+1-3&version=NET" target="_blank" rel="noopener">Romans 1–3</a></div>
+        <p>Humanity's problem.</p>
+        <p>Everyone is guilty before God.</p>
+      </div>
+      <div class="rcard">
+        <div class="rword">Redemption</div>
+        <div class="rrange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+3-5&version=NET" target="_blank" rel="noopener">Romans 3–5</a></div>
+        <p>Christ died for sinners.</p>
+        <p>Justification comes through faith.</p>
+      </div>
+      <div class="rcard">
+        <div class="rword">Renewal</div>
+        <div class="rrange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+6-8&version=NET" target="_blank" rel="noopener">Romans 6–8</a></div>
+        <p>The Spirit transforms believers.</p>
+        <p>We are no longer slaves to sin.</p>
+      </div>
+      <div class="rcard">
+        <div class="rword">Restoration</div>
+        <div class="rrange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+9-16&version=NET" target="_blank" rel="noopener">Romans 9–16</a></div>
+        <p>God's plan for Israel.</p>
+        <p>God's plan for the church.</p>
+        <p>God's plan for the future.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outline -->
+  <section>
+    <div class="section-head">
+      <h2>The Outline of Romans</h2>
+    </div>
+    <ul class="outline">
+      <li><a class="oname" href="https://imrodmartin.com/bible/romans/romans-1-handout.html" target="_blank">The Gospel Revealed</a><span class="orange">1:1–17</span></li>
+      <li><a class="oname" href="romans-2-handout.html" target="_blank">The World Condemned</a><span class="orange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+1%3A18-3%3A20&version=NET" target="_blank" rel="noopener">1:18–3:20</a></span></li>
+      <li><span class="oname">The Sinner Justified</span><span class="orange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+3%3A21-5%3A21&version=NET" target="_blank" rel="noopener">3:21–5:21</a></span></li>
+      <li><span class="oname">The Believer Sanctified</span><span class="orange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+6-8&version=NET" target="_blank" rel="noopener">6–8</a></span></li>
+      <li><span class="oname">Israel Explained</span><span class="orange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+9-11&version=NET" target="_blank" rel="noopener">9–11</a></span></li>
+      <li><span class="oname">The Church Transformed</span><span class="orange"><a class="v" href="https://www.biblegateway.com/passage/?search=Romans+12-16&version=NET" target="_blank" rel="noopener">12–16</a></span></li>
+    </ul>
+  </section>
+
+  <!-- Why it matters -->
+  <section>
+    <div class="section-head">
+      <h2>Why Romans Still Matters</h2>
+    </div>
+    <p>Our culture asks:</p>
+    <div class="culture-q">Who am I?</div>
+    <div class="culture-q">What is wrong with the world?</div>
+    <div class="culture-q">Is there truth?</div>
+    <div class="culture-q">How can I be accepted?</div>
+    <div class="culture-q">What happens after death?</div>
+
+    <p style="margin-top:18px;">Romans answers all of them. The book begins with humanity's deepest problem and ends with God's glorious solution.</p>
+
+    <div class="closing">
+      <p>It teaches that the greatest need of every person is not self-improvement, political reform, education, wealth, or success.</p>
+      <p class="big">The greatest need is reconciliation with God through Jesus Christ.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Romans Study &middot; Book Introduction</span>
+    <span class="brand"><a href="https://imrodmartin.com" style="color:inherit;text-decoration:underline;">imrodmartin.com</a> &middot; Bible Teaching</span>
+  </footer>
+
+</div>
+
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+    var dark = document.body.classList.contains('dark');
+    document.getElementById('themeBtn').textContent = dark ? 'Light' : 'Dark';
+  }
+</script>
+</body>
+</html>
