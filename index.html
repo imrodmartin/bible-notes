@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Books of the Bible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-deep: #0a1730;
+    --navy-soft: #1a3056;
+    --gold: #c9a44c;
+    --gold-bright: #e0bd66;
+    --parchment: #f6f1e7;
+    --parchment-soft: #ece3d2;
+    --ink: #1c2433;
+    --muted: #6b7280;
+    --line: rgba(201, 164, 76, 0.28);
+    --card-bg: #ffffff;
+    --shadow: 0 1px 2px rgba(15, 31, 61, 0.06), 0 8px 24px rgba(15, 31, 61, 0.07);
+  }
+
+  [data-theme="dark"] {
+    --parchment: #0b1426;
+    --parchment-soft: #0f1d36;
+    --ink: #e7ecf5;
+    --muted: #9aa6bd;
+    --line: rgba(201, 164, 76, 0.22);
+    --card-bg: #14223f;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 10px 30px rgba(0,0,0,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(201,164,76,0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(26,48,86,0.18), transparent 55%),
+      var(--parchment);
+    color: var(--ink);
+    line-height: 1.5;
+    min-height: 100vh;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  /* Header */
+  header {
+    position: relative;
+    padding: 72px 0 40px;
+    text-align: center;
+  }
+
+  .toggle {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--card-bg);
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 18px;
+    display: grid; place-items: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .toggle:hover { transform: rotate(-12deg) scale(1.06); border-color: var(--gold); }
+
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(3rem, 7vw, 5.2rem);
+    line-height: 1.0;
+    letter-spacing: 0.5px;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+
+  .sub {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 1.02rem;
+    max-width: 540px;
+    margin-left: auto; margin-right: auto;
+  }
+
+  .rule {
+    width: 100px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 30px auto 0;
+  }
+
+  /* Sections */
+  .testament { padding: 28px 0 12px; }
+
+  .t-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 26px;
+  }
+  .t-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+  }
+  .t-head .count {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .t-head .bar {
+    flex: 1; height: 1px;
+    background: var(--line);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .book {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--ink);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  }
+  .book::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.22s ease;
+  }
+  .book:hover { transform: translateY(-3px); border-color: var(--gold); }
+  .book:hover::before { transform: scaleY(1); }
+  .book:hover .num { color: var(--gold); }
+
+  .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--muted);
+    min-width: 24px;
+    transition: color 0.18s ease;
+  }
+  .name {
+    font-weight: 500;
+    font-size: 0.96rem;
+    letter-spacing: 0.1px;
+  }
+
+  /* Group labels */
+  .group-label {
+    grid-column: 1 / -1;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 14px;
+    padding-left: 2px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .group-label::after {
+    content: ""; flex: 1; height: 1px; background: var(--line);
+  }
+
+  footer {
+    text-align: center;
+    padding: 56px 0 64px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer .verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  /* staggered entrance */
+  .book { opacity: 0; transform: translateY(10px); animation: rise 0.5s ease forwards; }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 520px) {
+    .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    header { padding: 56px 0 30px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <button class="toggle" id="themeToggle" aria-label="Toggle dark mode">☾</button>
+    <div class="wrap">
+      <div class="eyebrow">Scripture Library</div>
+      <h1>The Books of the <em>Bible</em></h1>
+      <p class="sub">Sixty-six books, two testaments, one unfolding story. Select a book to begin.</p>
+      <div class="rule"></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="testament">
+      <div class="t-head">
+        <h2>Old Testament</h2>
+        <span class="count">39 Books</span>
+        <span class="bar"></span>
+      </div>
+      <div class="grid" id="ot"></div>
+    </section>
+
+    <section class="testament">
+      <div class="t-head">
+        <h2>New Testament</h2>
+        <span class="count">27 Books</span>
+        <span class="bar"></span>
+      </div>
+      <div class="grid" id="nt"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="verse">"All Scripture is God-breathed and is profitable."</div>
+    <div>2 Timothy 3:16 &middot; imrodmartin.com</div>
+  </footer>
+
+<script>
+  // Theme toggle
+  const root = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  function setTheme(t){
+    root.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? '☀' : '☾';
+  }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setTheme(prefersDark ? 'dark' : 'light');
+  btn.addEventListener('click', () => {
+    setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+
+  // Book data with display name + folder slug + group
+  const ot = [
+    {g:"Pentateuch", books:[
+      ["Genesis","genesis"],["Exodus","exodus"],["Leviticus","leviticus"],["Numbers","numbers"],["Deuteronomy","deuteronomy"]
+    ]},
+    {g:"Historical Books", books:[
+      ["Joshua","joshua"],["Judges","judges"],["Ruth","ruth"],["1 Samuel","1-samuel"],["2 Samuel","2-samuel"],
+      ["1 Kings","1-kings"],["2 Kings","2-kings"],["1 Chronicles","1-chronicles"],["2 Chronicles","2-chronicles"],
+      ["Ezra","ezra"],["Nehemiah","nehemiah"],["Esther","esther"]
+    ]},
+    {g:"Poetry & Wisdom", books:[
+      ["Job","job"],["Psalms","psalms"],["Proverbs","proverbs"],["Ecclesiastes","ecclesiastes"],["Song of Songs","song-of-songs"]
+    ]},
+    {g:"Major Prophets", books:[
+      ["Isaiah","isaiah"],["Jeremiah","jeremiah"],["Lamentations","lamentations"],["Ezekiel","ezekiel"],["Daniel","daniel"]
+    ]},
+    {g:"Minor Prophets", books:[
+      ["Hosea","hosea"],["Joel","joel"],["Amos","amos"],["Obadiah","obadiah"],["Jonah","jonah"],["Micah","micah"],
+      ["Nahum","nahum"],["Habakkuk","habakkuk"],["Zephaniah","zephaniah"],["Haggai","haggai"],["Zechariah","zechariah"],["Malachi","malachi"]
+    ]}
+  ];
+
+  const nt = [
+    {g:"The Gospels", books:[
+      ["Matthew","matthew"],["Mark","mark"],["Luke","luke"],["John","john"]
+    ]},
+    {g:"History", books:[
+      ["Acts","acts"]
+    ]},
+    {g:"Pauline Epistles", books:[
+      ["Romans","romans"],["1 Corinthians","1-corinthians"],["2 Corinthians","2-corinthians"],["Galatians","galatians"],
+      ["Ephesians","ephesians"],["Philippians","philippians"],["Colossians","colossians"],["1 Thessalonians","1-thessalonians"],
+      ["2 Thessalonians","2-thessalonians"],["1 Timothy","1-timothy"],["2 Timothy","2-timothy"],["Titus","titus"],["Philemon","philemon"]
+    ]},
+    {g:"General Epistles", books:[
+      ["Hebrews","hebrews"],["James","james"],["1 Peter","1-peter"],["2 Peter","2-peter"],["1 John","1-john"],
+      ["2 John","2-john"],["3 John","3-john"],["Jude","jude"]
+    ]},
+    {g:"Prophecy", books:[
+      ["Revelation","revelation"]
+    ]}
+  ];
+
+  function render(target, sections){
+    const el = document.getElementById(target);
+    let n = 1;
+    let html = "";
+    sections.forEach(sec => {
+      html += `<div class="group-label">${sec.g}</div>`;
+      sec.books.forEach(([name, slug]) => {
+        const delay = (n * 0.012).toFixed(3);
+        html += `<a class="book" href="/${slug}/index.html" style="animation-delay:${delay}s">
+          <span class="num">${n}</span><span class="name">${name}</span></a>`;
+        n++;
+      });
+    });
+    el.innerHTML = html;
+  }
+
+  render('ot', ot);
+  render('nt', nt);
+</script>
+</body>
+</html>
